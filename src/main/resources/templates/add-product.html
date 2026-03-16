@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Product</title>
+    <meta charset="UTF-8">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg p-4">
+
+        <h2 class="text-center mb-4">➕ Add New Product</h2>
+
+        <form th:action="@{/admin/products/save}"
+              th:object="${product}"
+              method="post"
+              enctype="multipart/form-data">
+
+            <!-- Product Name -->
+            <div class="mb-3">
+                <label class="form-label">Product Name</label>
+                <input type="text"
+                       th:field="*{name}"
+                       class="form-control"
+                       placeholder="Enter product name"
+                       required>
+            </div>
+
+            <!-- Category -->
+            <div class="mb-3">
+                <label class="form-label">Category</label>
+                <select th:field="*{category.id}" class="form-select">
+
+                    <option value="">Select Category</option>
+
+                    <option th:each="cat : ${categories}"
+                            th:value="${cat.id}"
+                            th:text="${cat.name}">
+                    </option>
+
+                </select>
+
+
+
+            </div>
+
+            <!-- Quantity -->
+            <div class="mb-3">
+                <label class="form-label">Quantity</label>
+                <input type="number"
+                       th:field="*{quantity}"
+                       class="form-control"
+                       placeholder="Enter quantity"
+                       required>
+            </div>
+
+            <!-- Price -->
+                <label class="form-label">Price</label>
+                <input type="number"
+                       step="0.01"
+                       th:field="*{price}"
+                       class="form-control"
+                       placeholder="Enter price"
+                       required>
+
+
+            <!-- Image Upload -->
+            <!--<div class="mb-3">
+                <label class="form-label">Product Image</label>
+                <input type="file"
+                       class="form-control"
+                       name="imageFile"
+                       accept="image/*">
+            </div>-->
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between">
+
+                <a href="/admin/products" class="btn btn-secondary">
+                    ⬅ Back
+                </a>
+
+                <button type="submit" class="btn btn-success">
+                    💾 Save Product
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+```
