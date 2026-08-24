@@ -1,0 +1,14 @@
+<h2>Stock In</h2>
+
+
+
+<form th:action="@{/admin/products/stock-in}" method="post">
+
+    <input type="hidden" name="id" th:value="${product.id}">
+
+    <label>Quantity:</label>
+    <input type="number" name="quantity" required>
+
+    <button type="submit">Add Stock</button>
+
+</form>

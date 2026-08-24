@@ -18,6 +18,8 @@ public class User {
     private String password;
 
     private String role; // ADMIN, MANAGER, STAFF
+    private String otp;
+    private java.time.LocalDateTime otpExpiry;
 
     // Getters and Setters
     public Long getId() {
@@ -55,4 +57,9 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+    public String getOtp() { return otp; }
+    public void setOtp(String otp) { this.otp = otp; }
+
+    public java.time.LocalDateTime getOtpExpiry() { return otpExpiry; }
+    public void setOtpExpiry(java.time.LocalDateTime otpExpiry) { this.otpExpiry = otpExpiry; }
 }

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alerts</title>
+    <meta charset="UTF-8">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <div class="card shadow p-4">
+
+        <h2 class="text-center mb-4">🚨 Inventory Alerts</h2>
+        <div class="alert alert-warning text-center">
+            ⚠ You have <b th:text="${activeAlertCount}"></b> active alerts!
+        </div>
+        <div th:if="${activeAlertCount == 0}" class="alert alert-success text-center">
+            ✅ No alerts, system healthy!
+        </div>
+
+        <a href="/admin/products" class="btn btn-secondary mb-3">⬅ Back</a>
+        <form method="get" action="/admin/alerts" class="mb-3">
+
+            <select name="type" class="form-select" style="width:150px; display:inline;">
+                <option value="">All Type</option>
+                <option value="LOW_STOCK">Low Stock</option>
+                <option value="OUT_OF_STOCK">Out Of Stock</option>
+            </select>
+
+            <select name="severity" class="form-select" style="width:150px; display:inline;">
+                <option value="">All Severity</option>
+                <option value="HIGH">High</option>
+                <option value="MEDIUM">Medium</option>
+            </select>
+
+            <select name="status" class="form-select" style="width:150px; display:inline;">
+                <option value="">All Status</option>
+                <option value="ACTIVE">Active</option>
+                <option value="RESOLVED">Resolved</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary">Filter</button>
+
+            <a href="/admin/alerts" class="btn btn-secondary">Reset</a>
+
+        </form>
+
+        <table class="table table-bordered text-center">
+
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Product ID</th>
+                <th>Type</th>
+                <th>Severity</th>
+                <th>Message</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="alert : ${alerts}">
+
+                <td th:text="${alert.alertId}"></td>
+                <td th:text="${alert.productId}"></td>
+                <td th:text="${alert.alertType}"></td>
+                <td>
+
+                    <a th:if="${alert.status == 'ACTIVE'}"
+                       th:href="@{/admin/alerts/resolve/{id}(id=${alert.alertId})}"
+                       class="btn btn-success btn-sm">
+                        ✔ Resolve
+                    </a>
+
+                </td>
+
+                <!-- 🔥 Severity Color -->
+                <td>
+                    <span th:if="${alert.severity == 'HIGH'}" class="text-danger fw-bold">
+                        🔴 HIGH
+                    </span>
+
+                    <span th:if="${alert.severity == 'MEDIUM'}" class="text-warning fw-bold">
+                        🟠 MEDIUM
+                    </span>
+
+                    <span th:if="${alert.severity == 'LOW'}" class="text-success fw-bold">
+                        🟢 LOW
+                    </span>
+                </td>
+
+                <td th:text="${alert.message}"></td>
+
+                <!-- Status -->
+                <td>
+                    <span th:if="${alert.status == 'ACTIVE'}" class="badge bg-danger">
+                        ACTIVE
+                    </span>
+
+                    <span th:if="${alert.status == 'RESOLVED'}" class="badge bg-success">
+                        RESOLVED
+                    </span>
+                </td>
+
+                <td th:text="${alert.createdDate}"></td>
+
+            </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

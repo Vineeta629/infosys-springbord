@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Report</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<h2>📊 Inventory Report</h2>
+<h3>📊 Stock Analytics</h3>
+<canvas id="stockChart" width="400" height="200"></canvas>
+
+<p><b>Type:</b> <span th:text="${report.reportType}"></span></p>
+<p><b>Date:</b> <span th:text="${report.generatedDate}"></span></p>
+<p><b>Summary:</b> <span th:text="${report.dataSummary}"></span></p>
+<p><b>Recommendations:</b> <span th:text="${report.recommendations}"></span></p>
+<p>Stock In: <span th:text="${stockIn}"></span></p>
+<p>Stock Out: <span th:text="${stockOut}"></span></p>
+<script th:inline="javascript">
+    const stockIn = [[${stockIn}]];
+    const stockOut = [[${stockOut}]];
+
+    const ctx = document.getElementById('stockChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Stock In', 'Stock Out'],
+            datasets: [{
+                label: 'Inventory Movement',
+                data: [stockIn, stockOut],
+                borderWidth: 1
+            }]
+        }
+    });
+</script>
+
+</body>
+</html>

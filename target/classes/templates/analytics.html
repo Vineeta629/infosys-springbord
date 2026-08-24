@@ -1,0 +1,181 @@
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body style="background:#121212; font-family: Arial;">
+
+<h2 style="text-align:center;">📈 Analytics Dashboard</h2>
+
+
+
+<div style="display: flex; justify-content: center; gap: 40px; margin-top: 40px;">
+
+    COLUMN CHART
+    <div style="width: 450px; height: 300px;">
+        <canvas id="columnChart"></canvas>
+    </div>
+
+     PIE CHART
+    <div style="width: 350px; height: 300px;">
+        <canvas id="pieChart"></canvas>
+    </div>
+
+</div>
+
+
+<script th:inline="javascript">
+
+    const stockIn = [[${stockIn}]];
+    const stockOut = [[${stockOut}]];
+
+    // ✅ COLUMN CHART
+    new Chart(document.getElementById('columnChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Stock In', 'Stock Out'],
+            datasets: [{
+                label: 'Stock Movement',
+                data: [stockIn, stockOut],
+                backgroundColor: ['#4CAF50', '#F44336']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Stock Movement Analysis'
+                }
+            }
+        }
+    });
+
+    const productUsage = [[${productUsage}]];
+
+    // ✅ PIE CHART
+    new Chart(document.getElementById('pieChart'), {
+        type: 'pie',
+        data: {
+            labels: Object.keys(productUsage),
+            datasets: [{
+                data: Object.values(productUsage)
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+
+</script>
+
+</body>
+</html>-->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body style="background:#121212; color:white; font-family: Arial;">
+
+<h2 style="text-align:center;">📈 Analytics Dashboard</h2>
+
+<div style="display: flex; justify-content: center; gap: 40px; margin-top: 40px;">
+
+    <!-- COLUMN CHART -->
+    <div style="width: 450px; height: 300px; background:#1e1e2f; padding:15px; border-radius:10px;">
+        <canvas id="columnChart"></canvas>
+    </div>
+
+    <!-- PIE CHART -->
+    <div style="width: 350px; height: 300px; background:#1e1e2f; padding:15px; border-radius:10px;">
+        <canvas id="pieChart"></canvas>
+    </div>
+
+</div>
+
+<script th:inline="javascript">
+
+    const stockIn = [[${stockIn}]];
+    const stockOut = [[${stockOut}]];
+
+    // ✅ COLUMN CHART
+    new Chart(document.getElementById('columnChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Stock In', 'Stock Out'],
+            datasets: [{
+                label: 'Stock Movement',
+                data: [stockIn, stockOut],
+                backgroundColor: ['#4CAF50', '#F44336']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Stock Movement Analysis',
+                    color: 'white'
+                },
+                legend: {
+                    labels: {
+                        color: 'white'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: 'white' }
+                },
+                y: {
+                    ticks: { color: 'white' }
+                }
+            }
+        }
+    });
+
+    const productUsage = [[${productUsage}]];
+
+    // ✅ PIE CHART
+    new Chart(document.getElementById('pieChart'), {
+        type: 'pie',
+        data: {
+            labels: Object.keys(productUsage),
+            datasets: [{
+                data: Object.values(productUsage)
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white'
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>
+
+

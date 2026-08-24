@@ -1,0 +1,14 @@
+<h2>Stock Out</h2>
+
+
+<form th:action="@{/admin/products/stock-out}" method="post">
+
+    <input type="hidden" name="id" th:value="${product.id}">
+
+    <input type="number" name="quantity" required>
+
+    <button type="submit">Remove Stock</button>
+
+</form>
+
+<p style="color:red">${error}</p>

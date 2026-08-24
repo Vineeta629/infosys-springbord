@@ -23,7 +23,7 @@ public class AdminController {
         return "admin-dashboard";
     }*/
 
-    @GetMapping("/admin/dashboard")
+    @GetMapping("/admin/home")
     public String adminDashboard(Model model) {
 
         long totalProducts = productRepository.count();
